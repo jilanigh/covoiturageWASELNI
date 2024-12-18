@@ -16,6 +16,13 @@
       <executable path="composer" />
     </execution>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP 8.2">
     <include_path>
       <path value="$PROJECT_DIR$/vendor/symfony/validator" />
@@ -147,6 +154,11 @@
       <path value="$PROJECT_DIR$/vendor/psr/clock" />
       <path value="$PROJECT_DIR$/vendor/psr/link" />
       <path value="$PROJECT_DIR$/vendor/myclabs/deep-copy" />
+      <path value="$PROJECT_DIR$/vendor/symfonycasts/verify-email-bundle" />
+      <path value="$PROJECT_DIR$/vendor/easycorp/easyadmin-bundle" />
+      <path value="$PROJECT_DIR$/vendor/symfony/ux-twig-component" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-uuid" />
+      <path value="$PROJECT_DIR$/vendor/symfony/uid" />
     </include_path>
   </component>
   <component name="ProjectColorInfo">{
@@ -157,31 +169,106 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/xampp/php/php.ini&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Docker.docker: Compose Deployment.executor": "Run",
+    "PHPUnit.RegistrationControllerTest.executor": "Run",
+    "PHPUnit.RegistrationControllerTest.testRegister.executor": "Run",
+    "PHPUnit.TrajetControllerTest.executor": "Debug",
+    "PHPUnit.TrajetControllerTest.testIndex.executor": "Run",
+    "PHPUnit.TrajetControllerTest.testNew.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "C:/xampp/htdocs/covoiturage_WASELNI",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "reference.webide.settings.project.settings.php.zend.framework.tool",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\covoiturage_WASELNI" />
+      <recent name="C:\xampp\htdocs\covoiturage_WASELNI\public" />
+    </key>
+  </component>
   <component name="RunAnythingCache">
     <option name="myCommands">
       <command value="php bin/console make:user" />
-      <command value="php bin/console make:entity trajet" />
       <command value="php bin/console make:entity voiture" />
+      <command value="php bin/console make:controller Trajet" />
+      <command value="php bin/console make:controller Voiture" />
+      <command value="php bin/console make:auth" />
+      <command value="php bin/console make:registration" />
+      <command value="composer require symfonycasts/verify-email-bundle" />
+      <command value="php bin/console make:entity user" />
+      <command value="php bin/console make:crud" />
+      <command value="php bin/console make:crud Trajet" />
+      <command value="php bin/console make:controller" />
+      <command value="php bin/console make:entity trajet" />
+      <command value="php bin/console make:crud Voiture" />
+      <command value="php bin/console make:migration" />
+      <command value="php bin/console d:m:m" />
+      <command value="php bin/console make:form search" />
+      <command value="php bin/console make:controller searchTrajet" />
+      <command value="php bin/console make:admin" />
+      <command value="symfony console make:admin:dashboard" />
+      <command value="php bin/console make:admin:dashboard" />
+      <command value="php bin/console make:admin:crud" />
+      <command value="php bin/console cache:clear" />
+      <command value="composer require --dev phpunit/phpunit" />
+      <command value="php bin/phpunit tests/RegistrationControllerTest.php" />
+      <command value="php bin/console doctrine:database:create --env=test" />
+      <command value="php bin/console doctrine:schema:update --force --env=test" />
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="PHPUnit.RegistrationControllerTest.testRegister">
     <configuration name="Main" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner configuration_file="$PROJECT_DIR$/phpunit.xml.dist" scope="XML" use_alternative_configuration_file="true" />
       <method v="2" />
     </configuration>
+    <configuration name="RegistrationControllerTest" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="App\Tests\RegistrationControllerTest" configuration_file="$PROJECT_DIR$/phpunit.xml.dist" file="$PROJECT_DIR$/tests/RegistrationControllerTest.php" scope="Class" />
+      <method v="2" />
+    </configuration>
+    <configuration name="RegistrationControllerTest.testRegister" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="App\Tests\RegistrationControllerTest" configuration_file="$PROJECT_DIR$/phpunit.xml.dist" file="$PROJECT_DIR$/tests/RegistrationControllerTest.php" method="testRegister" scope="Method" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TrajetControllerTest" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="App\Tests\Controller\TrajetControllerTest" configuration_file="$PROJECT_DIR$/phpunit.xml.dist" file="$PROJECT_DIR$/tests/Controller/TrajetControllerTest.php" scope="Class" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TrajetControllerTest.testNew" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="App\Tests\Controller\TrajetControllerTest" configuration_file="$PROJECT_DIR$/phpunit.xml.dist" file="$PROJECT_DIR$/tests/Controller/TrajetControllerTest.php" method="testNew" scope="Method" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
+      <deployment type="docker-compose.yml">
+        <settings />
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="sourceFilePath" value="docker/docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="PHPUnit.RegistrationControllerTest.testRegister" />
+        <item itemvalue="PHPUnit.RegistrationControllerTest" />
+        <item itemvalue="Docker.docker: Compose Deployment" />
+        <item itemvalue="PHPUnit.TrajetControllerTest" />
+        <item itemvalue="PHPUnit.TrajetControllerTest.testNew" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -199,7 +286,10 @@
       <option name="presentableId" value="Default" />
       <updated>1733394226814</updated>
       <workItem from="1733394310645" duration="1490000" />
-      <workItem from="1733516417196" duration="604000" />
+      <workItem from="1733516417196" duration="20032000" />
+      <workItem from="1734101254464" duration="1834000" />
+      <workItem from="1734439796422" duration="3207000" />
+      <workItem from="1734539590329" duration="1030000" />
     </task>
     <servers />
   </component>

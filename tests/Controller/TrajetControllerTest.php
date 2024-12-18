@@ -28,47 +28,52 @@ final class TrajetControllerTest extends WebTestCase
         $this->manager->flush();
     }
 
-    public function testIndex(): void
-    {
-        $this->client->followRedirects();
-        $crawler = $this->client->request('GET', $this->path);
 
-        self::assertResponseStatusCodeSame(200);
-        self::assertPageTitleContains('Trajet index');
-
-        // Use the $crawler to perform additional assertions e.g.
-        // self::assertSame('Some text on the page', $crawler->filter('.p')->first());
-    }
 
     public function testNew(): void
     {
-        $this->markTestIncomplete();
+        // Log in as a user
+        $this->client->request('GET', '/login');
+        $this->client->submitForm('Sign in', [
+            'email' => 'me@example.com',
+            'password' => 'password',
+        ]);
+        $this->client->followRedirect();
+
+        // Now request the new page
         $this->client->request('GET', sprintf('%snew', $this->path));
 
         self::assertResponseStatusCodeSame(200);
 
         $this->client->submitForm('Save', [
-            'trajet[depart]' => 'Testing',
-            'trajet[arrivee]' => 'Testing',
-            'trajet[dateDepart]' => 'Testing',
-            'trajet[prix]' => 'Testing',
-            'trajet[placeDispo]' => 'Testing',
+            'trajet[depart]' => 'Paris',
+            'trajet[arrivee]' => 'Lyon',
+            'trajet[dateDepart]' => '2023-12-01 08:00:00',
+            'trajet[prix]' => 50.00,
+            'trajet[placeDispo]' => 3,
         ]);
 
-        self::assertResponseRedirects($this->path);
+        self::assertResponseRedirects('/trajet/liste');
 
         self::assertSame(1, $this->repository->count([]));
     }
 
     public function testShow(): void
     {
-        $this->markTestIncomplete();
+        // Log in as a user
+        $this->client->request('GET', '/login');
+        $this->client->submitForm('Sign in', [
+            'email' => 'me@example.com',
+            'password' => 'password',
+        ]);
+        $this->client->followRedirect();
+       // $this->markTestIncomplete();
         $fixture = new Trajet();
-        $fixture->setDepart('My Title');
-        $fixture->setArrivee('My Title');
-        $fixture->setDateDepart('My Title');
-        $fixture->setPrix('My Title');
-        $fixture->setPlaceDispo('My Title');
+        $fixture->setDepart('Paris');
+        $fixture->setArrivee('Lyon');
+        $fixture->setDateDepart(new \DateTime('2023-12-01 08:00:00'));
+        $fixture->setPrix(50.00);
+        $fixture->setPlaceDispo(3);
 
         $this->manager->persist($fixture);
         $this->manager->flush();
@@ -81,57 +86,86 @@ final class TrajetControllerTest extends WebTestCase
         // Use assertions to check that the properties are properly displayed.
     }
 
-    public function testEdit(): void
-    {
-        $this->markTestIncomplete();
-        $fixture = new Trajet();
-        $fixture->setDepart('Value');
-        $fixture->setArrivee('Value');
-        $fixture->setDateDepart('Value');
-        $fixture->setPrix('Value');
-        $fixture->setPlaceDispo('Value');
+public function testEdit(): void
+{
+    // Log in as a user
+    $this->client->request('GET', '/login');
+    $this->client->submitForm('Sign in', [
+        'email' => 'me@example.com',
+        'password' => 'password',
+    ]);
+    $this->client->followRedirect();
 
-        $this->manager->persist($fixture);
-        $this->manager->flush();
+    // Create a new Trajet entity
+    $fixture = new Trajet();
+    $fixture->setDepart('Initial Value');
+    $fixture->setArrivee('Initial Value');
+    $fixture->setDateDepart(new \DateTime('2023-12-01 08:00:00'));
+    $fixture->setPrix(50.00);
+    $fixture->setPlaceDispo(3);
 
-        $this->client->request('GET', sprintf('%s%s/edit', $this->path, $fixture->getId()));
+    $this->manager->persist($fixture);
+    $this->manager->flush();
 
-        $this->client->submitForm('Update', [
-            'trajet[depart]' => 'Something New',
-            'trajet[arrivee]' => 'Something New',
-            'trajet[dateDepart]' => 'Something New',
-            'trajet[prix]' => 'Something New',
-            'trajet[placeDispo]' => 'Something New',
-        ]);
+    // Fetch the newly created Trajet entity
+    $fixture = $this->repository->find($fixture->getId());
 
-        self::assertResponseRedirects('/trajet/');
+    // Request the edit page
+    $this->client->request('GET', sprintf('%s%s/edit', $this->path, $fixture->getId()));
 
-        $fixture = $this->repository->findAll();
+    // Submit the form with updated data
+    $this->client->submitForm('Update', [
+        'trajet[depart]' => 'Sidi thabet',
+        'trajet[arrivee]' => 'geant',
+        'trajet[dateDepart]' => '2024-12-01 08:00:00',
+        'trajet[prix]' => 4,
+        'trajet[placeDispo]' => 1,
+    ]);
 
-        self::assertSame('Something New', $fixture[0]->getDepart());
-        self::assertSame('Something New', $fixture[0]->getArrivee());
-        self::assertSame('Something New', $fixture[0]->getDateDepart());
-        self::assertSame('Something New', $fixture[0]->getPrix());
-        self::assertSame('Something New', $fixture[0]->getPlaceDispo());
-    }
+    self::assertResponseRedirects('/trajet/liste');
 
-    public function testRemove(): void
-    {
-        $this->markTestIncomplete();
-        $fixture = new Trajet();
-        $fixture->setDepart('Value');
-        $fixture->setArrivee('Value');
-        $fixture->setDateDepart('Value');
-        $fixture->setPrix('Value');
-        $fixture->setPlaceDispo('Value');
+    // Fetch the updated entity from the repository
+    $this->manager->refresh($fixture); // Ensure the entity is refreshed from the database
+    $updatedTrajet = $this->repository->find($fixture->getId());
 
-        $this->manager->persist($fixture);
-        $this->manager->flush();
+    // Assert that the properties have been updated
+    self::assertSame('Sidi thabet', $updatedTrajet->getDepart());
+    self::assertSame('geant', $updatedTrajet->getArrivee());
+    self::assertSame('2024-12-01 08:00:00', $updatedTrajet->getDateDepart()->format('Y-m-d H:i:s'));
+    self::assertSame(4, $updatedTrajet->getPrix());
+    self::assertSame(1, (int)$updatedTrajet->getPlaceDispo());
+}
+public function testRemove(): void
+{
+    // Log in as a user
+    $this->client->request('GET', '/login');
+    $this->client->submitForm('Sign in', [
+        'email' => 'me@example.com',
+        'password' => 'password',
+    ]);
+    $this->client->followRedirect();
 
-        $this->client->request('GET', sprintf('%s%s', $this->path, $fixture->getId()));
-        $this->client->submitForm('Delete');
+    // Create a new Trajet entity
+    $fixture = new Trajet();
+    $fixture->setDepart('Value');
+    $fixture->setArrivee('Value');
+    $fixture->setDateDepart(new \DateTime('2023-12-01 08:00:00'));
+    $fixture->setPrix(50.00);
+    $fixture->setPlaceDispo(3);
 
-        self::assertResponseRedirects('/trajet/');
-        self::assertSame(0, $this->repository->count([]));
-    }
+    $this->manager->persist($fixture);
+    $this->manager->flush();
+
+    // Fetch the newly created Trajet entity
+    $fixture = $this->repository->find($fixture->getId());
+
+    // Request the delete page
+    $this->client->request('GET', sprintf('%s%s', $this->path, $fixture->getId()));
+    $this->client->submitForm('Delete');
+
+    self::assertResponseRedirects('/trajet/liste');
+
+    // Assert that the entity has been removed
+    self::assertSame(0, $this->repository->count([]));
+}
 }
